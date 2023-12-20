@@ -1,3 +1,4 @@
 filtered/*
 in/*
 temp/*
+__pycache__
