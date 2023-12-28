@@ -31,6 +31,7 @@ def filter_corrupted_data(directory_path, new_directory_path, delimiter, encodin
 def merge_and_clean(directory_path, delimiter, encoding):
     # Initialize an empty list to store DataFrames
     df_list = []
+    print(f"Merging data...\n")
 
     # Iterate through all files in the directory
     for filename in os.listdir(directory_path):
@@ -39,7 +40,7 @@ def merge_and_clean(directory_path, delimiter, encoding):
             file_path = os.path.join(directory_path, filename)
 
             # Load the CSV file into a DataFrame
-            df = pd.read_csv(file_path, sep=delimiter, encoding=encoding)
+            df = pd.read_csv(file_path, sep=delimiter, encoding=encoding, low_memory=False)
 
             # Keep only the desired columns
             selected_columns = ['~MMSI', 'Vessel Name', 'Latitude', 'Longitude', 'Speed Over Ground (SOG)', 'Received Time UTC', 'Length', 'Ship Type']
@@ -51,4 +52,6 @@ def merge_and_clean(directory_path, delimiter, encoding):
     # Concatenate all DataFrames into a single DataFrame
     result_df = pd.concat(df_list, ignore_index=True)
 
+    print(f"All data merged.\n")
+    
     return result_df

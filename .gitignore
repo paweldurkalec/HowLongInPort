@@ -1,4 +1,6 @@
 filtered/*
 in/*
 temp/*
+out/*
+*.pkl
 __pycache__
